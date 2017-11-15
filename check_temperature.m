@@ -1,7 +1,7 @@
 function temperature_average=check_temperature(meas,epsilon)
 value=meas(end).temperature;
 average=mean( [meas(1:end-1).temperature] );
-if isnan( average)
+if isnan( average )
     average=value;
 end
 temperature_average=average;
