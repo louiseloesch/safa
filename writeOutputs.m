@@ -1,4 +1,4 @@
-function writeOutputs( actions )
+function writeOutputs( arduino, actions )
 % sends the outputs, eg.: LED status to Arduino
 
 
