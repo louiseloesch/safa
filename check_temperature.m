@@ -1,5 +1,6 @@
-function temperature_average=check_temperature(average,epsilon)
+function temperature_average=check_temperature(meas,epsilon)
 value=meas(end).temperature;
+average=mean(meas(1:end-1).temperature);
 temperature_average=average;
 if (average-epsilon<=value&&value<=average+epsilon)
     temperature_average=(average+value)/2;

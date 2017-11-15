@@ -1,5 +1,6 @@
-function humidity_average=check_humidity(average,epsilon)
+function humidity_average=check_humidity(meas,epsilon)
 value=meas(end).humidity;
+average=mean(meas(1:end-1).humidity);
 humidity_average=average;
 if (average-epsilon<=value&&value<=average+epsilon)
     humidity_average=(average+value)/2;
