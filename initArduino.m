@@ -1,5 +1,13 @@
 function a=initArduino()
 
-a=[];
+try
+    instrreset
+
+    a = serial('COM5');
+    set(a,'BaudRate',115200);
+    fopen(a);
+catch
+    a=[];
+end
 
 end
