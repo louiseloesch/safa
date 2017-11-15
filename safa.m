@@ -9,13 +9,13 @@ meas=[];
 while 1
     actMeas=readMeasurements( a );
     meas=updateHistory( actMeas, meas);
-    act=evalModels( meas )
+    act=evalModels( meas );
     writeOutputs( a, act );
     pause(Ts); 
 end
 
-fclose(s)
-delete(s)
-clear s
+% close arduino communication
+fclose(a);
+delete(a);
 
 end
