@@ -2,7 +2,7 @@ function repo=updateHistory( meas, repo)
 % manages the data stucture for the measurements
 
 N=1000;
-f={'humidity', 'temperature', 'gas', 'flame' };
+f={ 'flame', 'gas', 'humidity', 'temperature' };
 
 if isempty( repo )
     % init repo
