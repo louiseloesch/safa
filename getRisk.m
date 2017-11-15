@@ -2,10 +2,17 @@ function severity=getRisk( meas )
 
 severity=1;
 
-severity=severity&&( check_temperature(meas,1) > 30 ); % risk
-severity=severity&&( humidity(meas,4) < 30 ); % risk
-if meas(end).flame < 2 % fire
+% risk consditions
+severity=severity&&( check_temperature(meas,1) > 30 );
+severity=severity&&( humidity(meas,4) < 30 ); 
+severity=severity&&( meas(end).gas > 51 ); 
+
+if meas(end).gas > 204 % air dangerous
     severity=2;
+end
+
+if meas(end).flame < 2 % fire
+    severity=3;
 end
 
 severity=double( severity );
