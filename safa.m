@@ -6,9 +6,10 @@ a=initArduino();
 meas=[];
 while 1
     actMeas=readMeasurements( a );
-    meas=updateHistory( actMeas, meas)
-    act=evalModels( meas );
-    writeOutputs( act );
+    meas=updateHistory( actMeas, meas);
+    act=evalModels( meas )
+    writeOutputs( a, act );
+    pause(5); % wait for given seconds
 end
 
 
