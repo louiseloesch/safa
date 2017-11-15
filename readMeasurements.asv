@@ -3,6 +3,8 @@ function meas=readMeasurements( arduino )
 
 out = fscanf(arduino);
 
-meas = sscanf(out,'F%dG%dH%fT%f') % fire - gas - humidity - temperature
+A = sscanf(out,'%f')
+
+meas=zeros(4,1); 
 
 end

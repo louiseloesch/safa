@@ -1,7 +1,7 @@
 function safa()
 % entry point of SAFA
 
-Ts=5; % step time in sec
+Ts=1; % step time in sec
 
 a=initArduino();
 
@@ -14,5 +14,8 @@ while 1
     pause(Ts); 
 end
 
+fclose(s)
+delete(s)
+clear s
 
 end
