@@ -1,6 +1,8 @@
 function safa()
 % entry point of SAFA
 
+Ts=5; % step time in sec
+
 a=initArduino();
 
 meas=[];
@@ -9,7 +11,7 @@ while 1
     meas=updateHistory( actMeas, meas);
     act=evalModels( meas )
     writeOutputs( a, act );
-    pause(5); % wait for given seconds
+    pause(Ts); 
 end
 
 
