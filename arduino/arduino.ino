@@ -8,13 +8,15 @@ dht DHT;
 #define GREEN_PIN 5
 #define BLUE_PIN 7
 
-#define ALARM_RATE 20
-#define ALARM_DURATION 300
+#define ALARM_RATE 500
+#define ALARM_DURATION 1000
 
 float dht[2];
 boolean alarm;
 long next_alarm;
 int next_alarm_frequency;
+
+long next_read;
 
 void dht11(){
   int chk = DHT.read11(DHT11_PIN);
@@ -41,6 +43,8 @@ void setup()
 {
   alarm = false;
   next_alarm_frequency = 1000;
+
+  next_read = millis();
   
   pinMode(LED_BUILTIN, OUTPUT);
   pinMode(BUZZER_PIN, OUTPUT);
@@ -64,7 +68,9 @@ void loop()
   }
 
   if (Serial.available() > 0){
-    String instruction = Serial.readString();
+    String instruction = Serial.readStringUntil('\r\n');
+
+    Serial.println(instruction);
 
     int value = (instruction.charAt(1) - '0')*100 +
                 (instruction.charAt(2) - '0')*10 + 
@@ -86,21 +92,22 @@ void loop()
     
   }
 
-  int flameSensor = analogRead(A0);
-  int gasSensor = analogRead(A1);
-
-  dht11();
-
-  Serial.print("F");
-  Serial.print(flameSensor);
-  Serial.print("G"); 
-  Serial.print(gasSensor);
-  Serial.print("H");
-  Serial.print(dht[0]);
-  Serial.print("T");
-  Serial.println(dht[1]);
-
+  if(next_read < millis()){
+    int flameSensor = analogRead(A0);
+    int gasSensor = analogRead(A1);
   
-  delay(1000);
+    dht11();
+  
+    Serial.print("F");
+    Serial.print(flameSensor);
+    Serial.print("G"); 
+    Serial.print(gasSensor);
+    Serial.print("H");
+    Serial.print(dht[0]);
+    Serial.print("T");
+    Serial.println(dht[1]);
+
+    next_read = millis() + 1000;
+  }
 }
 
