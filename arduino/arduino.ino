@@ -7,6 +7,7 @@ dht DHT;
 #define RED_PIN 6
 #define GREEN_PIN 5
 #define BLUE_PIN 7
+#define FLAME_PIN 8
 
 #define ALARM_RATE 500
 #define ALARM_DURATION 1000
@@ -48,7 +49,8 @@ void setup()
   
   pinMode(LED_BUILTIN, OUTPUT);
   pinMode(BUZZER_PIN, OUTPUT);
-
+  pinMode(FLAME_PIN, INPUT);
+  
   digitalWrite(LED_BUILTIN, LOW);
   Serial.begin(115200);
 }
@@ -69,8 +71,6 @@ void loop()
 
   if (Serial.available() > 0){
     String instruction = Serial.readStringUntil('\r\n');
-
-    Serial.println(instruction);
 
     int value = (instruction.charAt(1) - '0')*100 +
                 (instruction.charAt(2) - '0')*10 + 
@@ -93,7 +93,7 @@ void loop()
   }
 
   if(next_read < millis()){
-    int flameSensor = analogRead(A0);
+    int flameSensor = digitalRead(FLAME_PIN);
     int gasSensor = analogRead(A1);
   
     dht11();

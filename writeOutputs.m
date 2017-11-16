@@ -22,6 +22,6 @@ if buzzer
 else
     buzzer=0;
 end
-fprintf(arduino,'R%03.fG%03.fB%03.fA%03.f', [led buzzer] );
+fprintf(arduino,'R%03.f\r\nG%03.f\r\nB%03.f\r\nA%03.f', [led buzzer] );
 
 end

@@ -11,7 +11,7 @@ severity=severity&&( humidity(meas,4) < 30 );
 %     severity=2;
 % end
 
-if meas(end).flame < 60 % fire
+if meas(end).flame == 0  % fire
     severity=3;
 end
 
