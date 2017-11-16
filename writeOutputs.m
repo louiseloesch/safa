@@ -6,45 +6,22 @@ buzzer=false;
 switch actions
     case 0
         disp('Green')
-        fprintf(arduino,'G255');
-        pause(1);
-        fprintf(arduino,'R000');
-        pause(1);
-        fprintf(arduino,'B000');
-        pause(1);
-        fprintf(arduino,'A000');
+        led=[ 0 255 0 ];
     case 1
         disp('Orange')
-        fprintf(arduino,'R255');
-        pause(1);
-        fprintf(arduino,'G165');
-        pause(1);
-        fprintf(arduino,'B000');
-        pause(1);
-        fprintf(arduino,'A000');
-    case 2
-        disp('Blue');
-        fprintf(arduino,'B255');
-        pause(1);
-        fprintf(arduino,'R000');
-        pause(1);
-        fprintf(arduino,'G000');
-        pause(1);
-        fprintf(arduino,'A000');
-
-    case 3
+        led=[ 255 165 0 ];
+    case { 2 3 }
         disp('Red with Buzzer')
         buzzer = true;
-        fprintf(arduino,'R255');
-        pause(1);
-        fprintf(arduino,'G000');
-        pause(1);
-        fprintf(arduino,'B000');
-        pause(1);
-        fprintf(arduino,'A111');
-
+        led=[ 255 0 0 ];
 end
 
 % write values to aurduino
+if buzzer
+    buzzer=111;
+else
+    buzzer=0;
+end
+fprintf(arduino,'R%dG%dB%dA%d', [led buzzer] );
 
 end
