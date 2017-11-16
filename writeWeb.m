@@ -17,10 +17,10 @@ for k=1:length(f)
     end
     url=[ url sep f{k} '=' num2str( data.(f{k}) ) ];
 end
-opt=weboptions( 'Timeout', 0.2 );
+
 tic
 try
-    r=webread(url,opt);
+    r=urlread(url,'Timeout', 0.4);
 catch
     disp('Timeout')
 end
