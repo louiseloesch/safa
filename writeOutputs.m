@@ -9,7 +9,7 @@ switch actions
         led=[ 0 255 0 ];
     case 1
         disp('Orange')
-        led=[ 255 165 0 ];
+        led=[ 255 50 0 ];
     case { 2 3 }
         disp('Red with Buzzer')
         buzzer = true;
