@@ -11,6 +11,7 @@ while 1
     meas=updateHistory( actMeas, meas);
     act=evalModels( meas );
     writeOutputs( a, act );
+    writeWeb( meas, act );
     pause(Ts); 
 end
 
