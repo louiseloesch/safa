@@ -3,6 +3,7 @@
 dht DHT;
 
 #define DHT11_PIN 3
+#define BUZZER_PIN 4
 
 float dht[2];
 
@@ -30,6 +31,8 @@ void dht11(){
 void setup()
 {
   pinMode(LED_BUILTIN, OUTPUT);
+  pinMode(BUZZER_PIN, OUTPUT);
+
   digitalWrite(LED_BUILTIN, LOW);
   Serial.begin(115200);
 }
@@ -40,14 +43,21 @@ void loop()
   if (Serial.available() > 0){
     String instruction = Serial.readString();
 
+    int value = (instruction.charAt(1) - '0')*100 +
+                (instruction.charAt(2) - '0')*10 + 
+                (instruction.charAt(3) - '0');
+                
     if (instruction.charAt(0) == 'R'){
-      analogWrite(5,255);
+      analogWrite(5,value);
     }else if (instruction.charAt(0) == 'G'){
-      analogWrite(6,255);
+      analogWrite(6,value);
     }else if (instruction.charAt(0) == 'B'){
-      analogWrite(7,255);
+      analogWrite(7,value);
     }else if (instruction.charAt(0) == 'A'){
-      analogWrite(4,255);
+      tone(BUZZER_PIN, 1000);
+      delay(1000);
+      noTone(BUZZER_PIN);
+      delay(1000);
     }
     
   }
