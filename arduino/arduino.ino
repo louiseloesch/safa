@@ -4,8 +4,17 @@ dht DHT;
 
 #define DHT11_PIN 3
 #define BUZZER_PIN 4
+#define RED_PIN 6
+#define GREEN_PIN 5
+#define BLUE_PIN 7
+
+#define ALARM_RATE 20
+#define ALARM_DURATION 300
 
 float dht[2];
+boolean alarm;
+long next_alarm;
+int next_alarm_frequency;
 
 void dht11(){
   int chk = DHT.read11(DHT11_PIN);
@@ -30,6 +39,9 @@ void dht11(){
 
 void setup()
 {
+  alarm = false;
+  next_alarm_frequency = 1000;
+  
   pinMode(LED_BUILTIN, OUTPUT);
   pinMode(BUZZER_PIN, OUTPUT);
 
@@ -40,6 +52,17 @@ void setup()
 void loop()
 {
 
+  // plays alarm withou blocking
+  if(alarm == true && next_alarm < millis()){
+    tone(BUZZER_PIN, next_alarm_frequency, ALARM_DURATION);
+    next_alarm = millis() + ALARM_RATE;
+    if (next_alarm_frequency > 1500){
+      next_alarm_frequency = 1000;
+    }else{
+      next_alarm_frequency = 2000;
+    }
+  }
+
   if (Serial.available() > 0){
     String instruction = Serial.readString();
 
@@ -48,16 +71,17 @@ void loop()
                 (instruction.charAt(3) - '0');
                 
     if (instruction.charAt(0) == 'R'){
-      analogWrite(5,value);
+      analogWrite(RED_PIN,value);
     }else if (instruction.charAt(0) == 'G'){
-      analogWrite(6,value);
+      analogWrite(GREEN_PIN,value);
     }else if (instruction.charAt(0) == 'B'){
-      analogWrite(7,value);
+      analogWrite(BLUE_PIN,value);
     }else if (instruction.charAt(0) == 'A'){
-      tone(BUZZER_PIN, 1000);
-      delay(1000);
-      noTone(BUZZER_PIN);
-      delay(1000);
+      if (value == 0){
+        alarm = false;
+      }else{
+        alarm = true;
+      }
     }
     
   }

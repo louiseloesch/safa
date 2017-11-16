@@ -17,6 +17,6 @@ for k=1:length(f)
     end
     url=[ url sep f{k} '=' num2str( data.(f{k}) ) ];
 end
-r=webread(url)
+r=webread(url);
 
 end

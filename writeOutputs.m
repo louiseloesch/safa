@@ -4,25 +4,44 @@ function writeOutputs( arduino, actions )
 led=[ 0 0 0 ];
 buzzer=false;
 switch actions
-    case 0 
-        led=[ 0 255 0 ]; % green
-        
+    case 0
+        disp('Green')
         fprintf(arduino,'G255');
+        pause(1);
+        fprintf(arduino,'R000');
+        pause(1);
+        fprintf(arduino,'B000');
+        pause(1);
+        fprintf(arduino,'A000');
     case 1
-        led=[ 255 165 0 ]; % orange
-        
+        disp('Orange')
         fprintf(arduino,'R255');
+        pause(1);
         fprintf(arduino,'G165');
+        pause(1);
+        fprintf(arduino,'B000');
+        pause(1);
+        fprintf(arduino,'A000');
     case 2
-        led=[ 0 0 255 ]; % blue
-        
+        disp('Blue');
         fprintf(arduino,'B255');
+        pause(1);
+        fprintf(arduino,'R000');
+        pause(1);
+        fprintf(arduino,'G000');
+        pause(1);
+        fprintf(arduino,'A000');
+
     case 3
-        led=[ 255 0 0 ]; % red
-        buzzer=true;
-        
+        disp('Red with Buzzer')
+        buzzer = true;
         fprintf(arduino,'R255');
-        fprintf(arduino,'A255');
+        pause(1);
+        fprintf(arduino,'G000');
+        pause(1);
+        fprintf(arduino,'B000');
+        pause(1);
+        fprintf(arduino,'A111');
 
 end
 

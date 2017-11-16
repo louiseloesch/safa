@@ -11,7 +11,7 @@ if meas(end).gas > 204 % air dangerous
     severity=2;
 end
 
-if meas(end).flame < 2 % fire
+if meas(end).flame < 60 % fire
     severity=3;
 end
 
