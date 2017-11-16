@@ -17,7 +17,11 @@ for k=1:length(f)
     end
     url=[ url sep f{k} '=' num2str( data.(f{k}) ) ];
 end
-opt=weboptions( 'Timeout', 0.5 );
-r=webread(url,opt);
+opt=weboptions( 'Timeout', 0.8 );
 
+try
+    r=webread(url,opt);
+catch
+    disp('Timeout')
+end
 end
