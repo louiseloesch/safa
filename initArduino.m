@@ -1,7 +1,7 @@
 function a=initArduino()
 
 try
-    instrreset
+    instrreset;
 
     a = serial('COM5');
     set(a,'BaudRate',115200);
