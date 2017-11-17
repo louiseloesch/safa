@@ -1,5 +1,6 @@
 import urllib.request
+import sys
 
-def webReq (uri):
+uri = str(sys.argv[1])
 
-    urllib.request.urlopen(uri).read()
+urllib.request.urlopen(uri).read()

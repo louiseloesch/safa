@@ -20,7 +20,10 @@ end
 
 tic
 try
-    r=urlread(url,'Timeout', 0.4);
+    %r=urlread(url,'Timeout', 0.4);
+    
+    system(['START /B py -3 D:\Users\Varandas\Workspace\safa\webreq.py "', url, '"']);
+    
 catch
     disp('Timeout')
 end

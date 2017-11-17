@@ -5,8 +5,6 @@ Athens Program POLI3
 Farm 4.0 : Technologies for smart agricolture
 Politecnico di Milano
 
-Add-ons:
+Dashboard:
 
-MATLAB Support Package for Arduino Hardware
-
-1-Wire Add-On Library for Arduino
+https://freeboard.io/board/5a0d626b511f114a610015a1
